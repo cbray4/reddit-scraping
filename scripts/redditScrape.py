@@ -47,25 +47,69 @@ url_list = [
 for url in url_list:
     submission = reddit.submission(url=url)
     print(submission)
+
+    subFile = open("../api-results/"+submission.title+".md", "w")
+
+    # === INITIAL POST SECTION ===
+    author = "[deleted user]" if submission.author == None else (
+            submission.author.name)
+    flair = submission.link_flair_text
+    title = submission.title
+    body = submission.selftext
+    embed = submission.url
+    originalTimePosted = datetime.fromtimestamp(submission.created_utc)
+    originalTimePosted = originalTimePosted.strftime("%m/%d/%Y, %H:%M:%S")
+
+    fullContent = (author + " posted " + title + " at " + originalTimePosted)
+    if embed != submission.permalink:
+        fullContent += "\n with link " + embed
+    if flair != None:
+        fullContent += "\n with flair " + flair
+    
+    subFile.write(fullContent+"\n")
+
+    # Delimiter for the sentiment analaysis script, since the initial post
+    # is not a part of the analysis
+    subFile.write("\nCOMMENTS-BEGIN:")
+
+    # === COMMENTS SECTION ===
+
+    # when going through replies, put "replied to" instead of "commented"
+    # for the sentiment analysis stuff
+
     # replace_more gets rid of the "load more comments" thing that pops up on 
     # Reddit so that all comments are loaded into the comments field
     submission.comments.replace_more(limit=None)
     submission.comment_sort = "top"
 
-    subFile = open("../api-results/"+submission.title+".md", "w")
-
-    commentList = submission.comments.list()
+    # this is for a depth first search algorithm
+    commentQueue = submission.comments[:]
 
     for i in range(0,99):
-        timePosted = datetime.fromtimestamp(commentList[i].created_utc)
+        comment = commentQueue.pop(0)
+
+        username = "[deleted user]" if comment.author == None else (
+            comment.author.name) 
+        # skip automod comments
+        if username == "Superstonk_QV":
+            continue
+        timePosted = datetime.fromtimestamp(comment.created_utc)
         timePosted = timePosted.strftime("%m/%d/%Y, %H:%M:%S")
 
-        username = "[deleted user]" if commentList[i].author == None else (
-            commentList[i].author.name) 
+        # Determine if comment is a reply or not
+        # reddit.comment(parent_id) will get the parent comment to do stuff with
+        # string[:2] is first two letters
+        if comment.parent_id[:2] != "t3":
+            content = username + " replied to " + previousUser
+        else:
+            content = username + " commented"
 
-        content = username + " commented at " + (
-            timePosted + ": " + commentList[i].body)
-        
+        content += " at " + timePosted + ": " + comment.body
+
         subFile.write("\n"+content+"\n")
+
+        previousUser = username
+
+        commentQueue[0:0] = comment.replies
     
     subFile.close()
