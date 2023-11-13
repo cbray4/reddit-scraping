@@ -1,12 +1,13 @@
 import nltk
-import numpy as np
-import pandas as pd
-
-nltk.download('vader_lexicon')
+#nltk.download('all')
+#nltk.download('all', download_dir='/project/redditsa/')
+nltk.data.path.append("/project/redditsa/nltk_Data");
+#nltk.download('vader_lexicon')
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+
 
 vader = SentimentIntensityAnalyzer()
 
@@ -21,7 +22,7 @@ def preprocess_text(text):
     return processed_text
 
 
-fileDirectory="/home/cbrow110/reddit-scraping/api-results/WEN DFV?.md"
+fileDirectory="/project/redditsa/reddit-scraping/api-results/WEN DFV?.md"
 firstComment=True
 currentComment=[]
 user=""
