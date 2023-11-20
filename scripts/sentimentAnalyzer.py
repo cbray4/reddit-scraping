@@ -40,7 +40,9 @@ replyPostTime=""
 
 replyScore=0
 totalPositives=0
+totalPositiveScore=0
 totalNegatives=0
+totalNegativeScore=0
 totalNeutrals=0
 totalCount=0
 totalScore=0
@@ -65,6 +67,10 @@ with open(fileDirectory) as file_object:
                         commentScore=line[5]
                         currentComment=line[7:]
                         replyIsMostRecent=False
+                    if (user not in userComments):
+                        userComments[user]=1
+                    else:
+                        userComments[user]=userComments[user]+1
                 else:
                     
                     print(user + " commented on " + postTime[0] + " at " + postTime[1] + " with a score of " + replyScore) 
@@ -77,8 +83,10 @@ with open(fileDirectory) as file_object:
                     totalCount=totalCount+1
                     if (tempScore > 0):
                         totalPositives=totalPositives+1
+                        totalPositiveScore=totalPositiveScore+tempScore
                     elif (tempScore < 0):
                         totalNegatives=totalNegatives+1
+                        totalNegativeScore=totalNegativeScore+tempScore
                     else:
                         totalNeutrals=totalNeutrals+1
                     print("\n")
@@ -95,6 +103,10 @@ with open(fileDirectory) as file_object:
                         commentScore=line[5]
                         postTime=line[3:5]
                         replyIsMostRecent=False
+                    if (user not in userComments):
+                        userComments[user]=1
+                    else:
+                        userComments[user]=userComments[user]+1
             elif (line[1]=="replied" or line[2]=="replied"):
                 if (firstReply==False):
                     print(repliedUser + " replied on " + replyPostTime[0] + " at " + replyPostTime[1] + " with a score of " + replyScore)
@@ -109,8 +121,10 @@ with open(fileDirectory) as file_object:
                     totalCount=totalCount+1
                     if (tempScore > 0):
                         totalPositives=totalPositives+1
+                        totalPositiveScore=totalPositiveScore+tempScore
                     elif (tempScore < 0):
                         totalNegatives=totalNegatives+1
+                        totalNegativeScore=totalNegativeScore+tempScore
                     else:
                         totalNeutrals=totalNeutrals+1
                 else:
@@ -127,6 +141,15 @@ with open(fileDirectory) as file_object:
                     currentReply=line[9:]
                     replyScore=line[7]
                     replyIsMostRecent=True
+                if (repliedUser not in userReplies):
+                    userReplies[repliedUser]=1
+                else:
+                    userReplies[repliedUser]=userReplies[repliedUser]+1
+                if (repliedUser not in whoRepliedToWho):
+                    whoRepliedToWho[repliedUser]=[]
+                    whoRepliedToWho[repliedUser].append(user)
+                else:
+                    whoRepliedToWho[repliedUser].append(user)
             else:
                 if (replyIsMostRecent == False):
                     currentComment = currentComment + line
@@ -147,8 +170,10 @@ totalScore=tempScore+totalScore
 totalCount=totalCount+1
 if (tempScore > 0):
     totalPositives=totalPositives+1
+    totalPositiveScore=totalPositiveScore+tempScore
 elif (tempScore < 0):
     totalNegatives=totalNegatives+1
+    totalNegativeScore=totalNegativeScore+tempScore
 else:
     totalNeutrals=totalNeutrals+1
 print("\n")
@@ -163,8 +188,10 @@ totalScore=tempScore+totalScore
 totalCount=totalCount+1
 if (tempScore > 0):
     totalPositives=totalPositives+1
+    totalPositiveScore=totalPositiveScore+tempScore
 elif (tempScore < 0):
     totalNegatives=totalNegatives+1
+    totalNegativeScore=totalNegativeScore+tempScore
 else:
     totalNeutrals=totalNeutrals+1
 print("\n")
@@ -174,17 +201,12 @@ print("FINAL SCORE:" )
 print("TOTAL NUMBER OF POSITIVE COMMENTS/REPLIES: " + str(totalPositives) + " out of " + str(totalCount))
 print("TOTAL NUMBER OF NEGATIVE COMMENTS/REPLIES: " + str(totalNegatives) + " out of " + str(totalCount))
 print("TOTAL NUMBER OF NEUTRAL COMMENTS/REPLIES: " + str(totalNeutrals) + " out of " + str(totalCount))
-print("AVERAGE COMMENT/REPLY SENTIMENT: " + str(totalScore/totalCount))
-#sample = 'I really REALLY hate NVIDIA!!!'
-#print("\n\n")
-#print(vader.polarity_scores(sample))
+print("TOTAL AVERAGE COMMENT/REPLY SENTIMENT: " + str(totalScore/totalCount))
+print("AVERAGE POSITIVE COMMENT/REPLY SENTIMENT: " + str(totalPositiveScore/totalPositives))
+print("AVERAGE NEGATIVE COMMENT/REPLY SENTIMENT: " + str(totalNegativeScore/totalNegatives))
+print(userComments)
+print("\n")
+print(userReplies)
+print("\n")
+print(whoRepliedToWho)
 
-#df = pd.read_csv('sampleFile.csv')
-#print("\n\n")
-#print(df.head())
-
-#print("\n\n")
-#with open("sampleFile.csv") as file_object:
-#    for line in file_object:
-#        print(vader.polarity_scores(line))
-#print(df.value_counts())
