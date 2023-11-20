@@ -10,6 +10,7 @@
 
 import praw
 from datetime import datetime
+import re
 
 # get Reddit instance, which gives us access to the Reddit API, in general
 # NOTE: Do NOT put quotes ("") around items in the praw.ini file
@@ -26,13 +27,17 @@ for url in url_list:
     submission = reddit.submission(url=url)
     print(submission)
 
-    subFile = open("../api-results/"+submission.title+".md", "w")
+    # clean out submission names for illegal characters
+    title = submission.title
+    title = title.replace(" ", "_")
+    title = "".join(x for x in title if x.isalnum() or x == "_")
+
+    subFile = open("../api-results/"+title+".md", "w")
 
     # === INITIAL POST SECTION ===
     author = "[deleted user]" if submission.author == None else (
             submission.author.name)
     flair = submission.link_flair_text
-    title = submission.title
     body = submission.selftext
     embed = "![Embed from Reddit post](" + submission.url + ")"
     originalTimePosted = datetime.fromtimestamp(submission.created_utc)
