@@ -24,9 +24,13 @@ def preprocess_text(text):
 
 fileDirectory="/project/redditsa/reddit-scraping/api-results/WEN DFV?.md"
 firstComment=True
+replyIsMostRecent=False
 currentComment=[]
+currentReply=[]
 user=""
 postTime=""
+repliedUser=""
+replyPostTime=""
 
 with open(fileDirectory) as file_object:
     for currentLine in file_object:
@@ -38,11 +42,9 @@ with open(fileDirectory) as file_object:
                     user=line[0]
                     postTime=line[3:5]
                     currentComment=line[5:]
+                    replyIsMostRecent=False
                 else:
-                    #print(currentComment)
-                    #print(' '.join(currentComment)) 
-                    #print(vader.polarity_scores(' '.join(currentComment)))
-                    #print("\n")
+                    
                     print(user + " commented on " + postTime[0] + " at " + postTime[1])
                     print(' '.join(currentComment))
                     print("----------------------------------------------")
@@ -53,10 +55,22 @@ with open(fileDirectory) as file_object:
                     currentComment=line[5:]
                     user=line[0]
                     postTime=line[3:5]
+                    replyIsMostRecent=False
+            elif (line[1]=="replied" or line[2]=="replied"):
+                user=line[0]
+                postTime=[5:7]
+                currentReply=[7:]
+                replyIsMostRecent=True
             else:
-                currentComment = currentComment + line
+                if (replyIsMostRecent == False):
+                    currentComment = currentComment + line
+                else:
+                    currentReply = currentReply + line
         elif (len(line)<=2 and firstComment==False):
-            currentComment = currentComment + line
+            if (replyIsMostRecent == False):
+               currentComment = currentComment + line
+            else:
+                currentReply = currentReply + line
 #sample = 'I really REALLY hate NVIDIA!!!'
 #print("\n\n")
 #print(vader.polarity_scores(sample))
