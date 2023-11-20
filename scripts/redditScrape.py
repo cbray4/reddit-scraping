@@ -37,7 +37,6 @@ for url in url_list:
     embed = submission.url
     originalTimePosted = datetime.fromtimestamp(submission.created_utc)
     originalTimePosted = originalTimePosted.strftime("%m/%d/%Y, %H:%M:%S")
-    # score = submission.score
 
     fullContent = (author + " posted " + title + " at " + originalTimePosted)
     if embed != submission.permalink:
@@ -70,7 +69,6 @@ for url in url_list:
             continue
         timePosted = datetime.fromtimestamp(comment.created_utc)
         timePosted = timePosted.strftime("%m/%d/%Y, %H:%M:%S")
-        # score = comment.score
 
         # Determine if comment is a reply or not
         # reddit.comment(parent_id) will get the parent comment to do stuff with
