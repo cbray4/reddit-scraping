@@ -8,4 +8,4 @@
 #SBATCH --error=/project/redditsa/reddit-scraping/sentiment-results/error
 
 python /project/redditsa/reddit-scraping/scripts/sentimentAnalyzer.py
-python /project/redditsa/reddit-scraping/scripts/fileOrganizer.py
+#python /project/redditsa/reddit-scraping/scripts/fileOrganizer.py

@@ -26,6 +26,7 @@ fileDirectory="/project/redditsa/reddit-scraping/api-results/WEN DFV?.md"
 userComments={}
 userReplies={}
 whoRepliedToWho={}
+mostRepliedToUsers={}
 
 firstComment=True
 firstReply=True
@@ -109,7 +110,7 @@ with open(fileDirectory) as file_object:
                         userComments[user]=userComments[user]+1
             elif (line[1]=="replied" or line[2]=="replied"):
                 if (firstReply==False):
-                    print(repliedUser + " replied on " + replyPostTime[0] + " at " + replyPostTime[1] + " with a score of " + replyScore)
+                    print(repliedUser + " replied to " + user + " on " + replyPostTime[0] + " at " + replyPostTime[1] + " with a score of " + replyScore)
                     print(' '.join(currentReply))
                     print("----------------------------------------------")
                     print("Sentiment analysis is as follows: ")
@@ -178,7 +179,7 @@ else:
     totalNeutrals=totalNeutrals+1
 print("\n")
 print("\n")
-print(repliedUser + " replied on " + replyPostTime[0] + " at " + replyPostTime[1] + " with a score of " + replyScore)
+print(repliedUser + " replied to " + user + " on " + replyPostTime[0] + " at " + replyPostTime[1] + " with a score of " + replyScore)
 print(' '.join(currentReply))
 print("----------------------------------------------")
 print("Sentiment analysis is as follows: ")
@@ -209,4 +210,13 @@ print("\n")
 print(userReplies)
 print("\n")
 print(whoRepliedToWho)
-
+print("\n")
+for key in whoRepliedToWho:
+    for entry in whoRepliedToWho[key]:
+        if (entry not in mostRepliedToUsers):
+            mostRepliedToUsers[entry]=1
+        else:
+            mostRepliedToUsers[entry]=mostRepliedToUsers[entry]+1
+print(mostRepliedToUsers)
+print("\n")
+#print(sorted(mostRepliedToUsers))
