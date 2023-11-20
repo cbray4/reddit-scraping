@@ -34,7 +34,7 @@ for url in url_list:
     flair = submission.link_flair_text
     title = submission.title
     body = submission.selftext
-    embed = submission.url
+    embed = "![Embed from Reddit post](" + submission.url + ")"
     originalTimePosted = datetime.fromtimestamp(submission.created_utc)
     originalTimePosted = originalTimePosted.strftime("%m/%d/%Y, %H:%M:%S")
 
