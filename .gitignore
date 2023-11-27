@@ -1,2 +1,3 @@
 scripts/praw.ini
 api-results/*
+sentiment-results/*
