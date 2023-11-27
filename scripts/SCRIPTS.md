@@ -42,6 +42,10 @@ to run the script:
 ```  
 python sentimentAnalyzer.py  
 ```
-Please note that the nltk package should be installed in order for this code to properly work.  
-This package is what allows for sentiment analysis of the comments and replies.
+Please note that the user will have to download specific nltk libraries in order  
+for this code to work. Once downloaded once, however, these libraries never have to  
+be downloaded again. The required libraries are SentimentIntensityAnalyzer, word_tokenize,  
+stopwords, and WordNetLemmatizer. By default, these will be downloaded to the home  
+directory, although you can change the path to be whatever you want.  
+These libraries are what allows for sentiment analysis of the comments and replies.
  
