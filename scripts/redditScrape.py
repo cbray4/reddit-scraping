@@ -20,7 +20,13 @@ reddit = praw.Reddit("bot1")
 # create a list of submissions to go through
 url_list = [
     "https://www.reddit.com/r/Superstonk/comments/z3mcze/wen_dfv/",
-    "https://www.reddit.com/r/Superstonk/comments/yw9g65/dr_susanne_trimbath_on_twitter/"
+    "https://www.reddit.com/r/Superstonk/comments/yw9g65/dr_susanne_trimbath_on_twitter/",
+    "https://www.reddit.com/r/Superstonk/comments/16uc4ve/gamestop_board_elected_ryan_cohen_as_ceo/",
+    "https://www.reddit.com/r/Superstonk/comments/12k0fzq/ryan_cohen_on_twitter_i_just_got_off_the_phone/",
+    "https://www.reddit.com/r/Superstonk/comments/vszcip/is_the_d_man_speaking_truth/",
+    "https://www.reddit.com/r/Superstonk/comments/qge7p8/louder_for_the_people_in_the_back/",
+    "https://www.reddit.com/r/Superstonk/comments/msblom/dfv/",
+    "https://www.reddit.com/r/Superstonk/comments/14a1yye/drsusanne_trimbath_on_twitter/"
 ]
 
 for url in url_list:
