@@ -1,3 +1,5 @@
 scripts/praw.ini
 api-results/*
-sentiment-results/*
+sentiment-results/* 
+slurmOutput
+slurmError
