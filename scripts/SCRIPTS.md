@@ -26,6 +26,8 @@ It should look like this:
 client_id=
 client_secret=
 user_agent=
+password=
+username=
 ```
 You can find how to get this [information here](https://github.com/reddit-archive/reddit/wiki/OAuth2-Quick-Start-Example#first-steps). 
 On the Beartooth cluster this information is already provided. Be sure NOT to 
