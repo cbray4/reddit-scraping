@@ -30,7 +30,7 @@ tempFile=""
 trueFile=""
 directory = '/project/redditsa/reddit-scraping/api-results/'
 for fileName in os.listdir(directory):
-    fileDirectory= os.path.join(directory, fileName)
+    fileDirectory= os.path.join(directory, fileName) 
     writeToFile=os.path.join('/project/redditsa/reddit-scraping/sentiment-results', fileName)
     tempFile='/project/redditsa/reddit-scraping/sentiment-results/temp-results'
 #fileDirectory="/project/redditsa/reddit-scraping/api-results/WEN DFV?.md"
