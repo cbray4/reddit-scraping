@@ -10,6 +10,6 @@ To run these scripts, navigate to the ``projects/reddit-scraping/scripts`` direc
 ```
 sbatch bashReddit.sh
 ```
-This will load all of the required modules and run both scripts back to back. Be aware that this will take a long time, possibly more than 10 minutes, because redditScrape.py takes a good amount of time to process the comments on each post. If you wish to be notified of the jobs completion, you can add ``--mail-user=<email here>`` at the end of the command above to receive an email when the job is finished.\ 
+This will load all of the required modules and run both scripts back to back. Be aware that this will take a long time, possibly more than 10 minutes, because redditScrape.py takes a good amount of time to process the comments on each post. If you wish to be notified of the jobs completion, you can add ``--mail-user=<email here>`` at the end of the command above to receive an email when the job is finished. 
 Output for the sentiment analysis can be found in the ``reddit-scraping/sentiment-results`` directory, with results for each post in their own file. Output for the scraping script can be found in ``reddit-scraping/api-results`` if you wish to look at those.
 
