@@ -29,5 +29,17 @@ user_agent=
 ```
 You can find how to get this [information here](https://github.com/reddit-archive/reddit/wiki/OAuth2-Quick-Start-Example#first-steps). 
 On the Beartooth cluster this information is already provided. Be sure NOT to 
-share this info freely.
+share this info freely.  
+
+## sentimentAnalyzer.py 
+This script is responsible for going through the files created by "redditScrap.py" and  
+organizing the information into an easy to read and and convenient format. In addition  
+to this, it also collects data based on certain factors such as who commented the most,  
+who replied the most, who replied to who, etc. Simply run the following command in order  
+to run the script:
+```  
+python sentimentAnalyzer.py  
+```
+Please note that the nltk package should be installed in order for this code to properly work.  
+This package is what allows for sentiment analysis of the comments and replies.
  
