@@ -6,9 +6,10 @@
 #SBATCH --mem=5G
 #SBATCH --output=/project/redditsa/reddit-scraping/slurmOutput
 #SBATCH --error=/project/redditsa/reddit-scraping/slurmError
+#SBATCH --mail-type=END
 
 module load miniconda3/4.12.0
-conda activate ../redditSAModule/
+conda activate /project/redditsa/redditSAModule/
 
-python redditScrape.py
-python sentimentAnalyzer.py
+python /project/redditsa/reddit-scraping/scripts/redditScrape.py
+python /project/redditsa/reddit-scraping/scripts/sentimentAnalyzer.py

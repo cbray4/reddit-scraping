@@ -7,4 +7,7 @@
 #SBATCH --output=/project/redditsa/reddit-scraping/sentiment-results/output
 #SBATCH --error=/project/redditsa/reddit-scraping/sentiment-results/error
 
+module load miniconda3/4.12.0
+conda activate /project/redditsa/redditSAModule/
+
 python /project/redditsa/reddit-scraping/scripts/sentimentAnalyzer.py
