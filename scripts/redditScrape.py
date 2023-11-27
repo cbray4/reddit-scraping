@@ -10,7 +10,6 @@
 
 import praw
 from datetime import datetime
-import re
 
 # get Reddit instance, which gives us access to the Reddit API, in general
 # NOTE: Do NOT put quotes ("") around items in the praw.ini file
