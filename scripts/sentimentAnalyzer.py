@@ -251,8 +251,11 @@ for fileName in os.listdir(directory):
                 mostRepliedToUsers[entry]=mostRepliedToUsers[entry]+1
 
     f2.write("The most replied to users: \n------------------------------------------\n")
-    for key in mostRepliedToUsers:
-        f2.write(key + ": " + str(mostRepliedToUsers[key]) + "\n")
+    #{k: v for k, v in sorted(x.items(), key=lambda item: item[1])
+    #dict(sorted(x.items(), key=lambda item: item[1]))
+    mostRepliedToUsersNew = dict(sorted(mostRepliedToUsers.items(), key=lambda x: x[1], reverse=True))
+    for key in mostRepliedToUsersNew:
+        f2.write(key + ": " + str(mostRepliedToUsersNew[key]) + "\n")
     f2.write("\n")
     f2.close()
 
